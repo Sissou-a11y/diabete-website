@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XtraClinic Navbar</title>
+    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <!--la barre de titre et search-->
+    <header>
+        <div class="logo">
+            <a href="Home.html"><img src="logo.png" alt="XtraClinic Logo"></a>
+            <a href="Home.html"><span class="clinic-name">My<span class="highlight">Diabeties</span></span></a>
+        </div>
+        <div class="search">
+            <input class="search-input" type="search" id="searchInput" placeholder="Rechercher..." oninput="searchFunction()">
+            <button class="btn">Search</button>
+            <div id="searchSuggestions" class="suggestions"></div> <!-- Résultats de la recherche -->
+        </div>
+    </header>
+
+    <style>
+ .suggestions {
+    position: absolute;           /* Positionner les suggestions directement sous le champ de recherche */
+    width: 25%;                   /* Largeur de 25% du champ de recherche */
+    max-height: 200px;            /* Limiter la hauteur des suggestions */
+    overflow-y: auto;             /* Ajouter un défilement vertical si nécessaire */
+    background-color: #fff;       /* Fond blanc pour les suggestions */
+    border: 1px solid #ccc;       /* Bordure autour des suggestions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour l'effet */
+    z-index: 9999;                /* S'assurer que les suggestions soient au-dessus des autres éléments */
+    display: none;                /* Cacher les suggestions par défaut */
+    top: 79px;                     /* Positionner les suggestions juste en bas du champ de recherche */
+                          /* Alignement à gauche avec le champ de recherche */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;              /* Ajuster la taille de la police pour une meilleure lisibilité */
+    color: #333;                  /* Couleur sombre pour le texte */
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;   /* Changer de fond au survol */
+    color: #000;                  /* Changer la couleur du texte au survol */
+}
+
+
+
+
+
+
+    </style>
+
+    <script>
+        // Liste de pages de votre site (noms des pages)
+        const pages = [
+            { name: "Type 1 diabetes", url: "type1.html" },
+            { name: "Type 2 diabetes", url: "type2.html" },
+            { name: "Gestational diabetes", url: "type3.html" },
+            { name: "Typ", url: "carbohydrates.html" },
+            { name: "Understanding Type 2 Diabetes", url: "understanding-type2.html" },
+            { name: "Exercise & Type 1", url: "exercise-type1.html" },
+            { name: "Understanding Type 1 Diabetes", url: "understanding-type1.html" },
+            { name: "Additional Types of Neuropathy", url: "neuropathy.html" },
+            { name: "Diabetes Type Confusion", url: "type-confusion.html" },
+            { name: "Type 1 Research Highlights", url: "research-highlights.html" }
+        ];
+
+        function searchFunction() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionsContainer = document.getElementById('searchSuggestions');
+            
+            // Si le champ est vide, cacher les suggestions
+            if (query === '') {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+            
+            // Filtrer les résultats en fonction de la saisie
+            const filteredPages = pages.filter(page => page.name.toLowerCase().includes(query));
+            
+            // Afficher les suggestions
+            suggestionsContainer.innerHTML = ''; // Réinitialiser les suggestions
+            filteredPages.forEach(page => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.classList.add('suggestion-item');
+                suggestionItem.textContent = page.name;
+                
+                // Ajouter un événement de clic pour rediriger l'utilisateur
+                suggestionItem.onclick = function() {
+                    window.location.href = page.url; // Redirige vers l'URL correspondante
+                };
+                
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+            
+            // Afficher ou masquer les suggestions
+            suggestionsContainer.style.display = filteredPages.length > 0 ? 'block' : 'none';
+        }
+
+        document.addEventListener('click', function(event) {
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+
+    // Vérifier si le clic se produit à l'intérieur du champ de recherche ou du sous-menu
+    if (!searchInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
+        suggestionsContainer.style.display = 'none';  // Cacher le sous-menu
+    }
+});
+
+// Fonction de recherche dynamique
+function searchFunction() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+    
+    // Si le champ est vide, cacher les suggestions
+    if (query === '') {
+        suggestionsContainer.style.display = 'none';
+        return;
+    }
+    
+    // Filtrer les résultats en fonction de la saisie
+    const filteredPages = pages.filter(page => page.name.toLowerCase().includes(query));
+    
+    // Afficher les suggestions
+    suggestionsContainer.innerHTML = ''; // Réinitialiser les suggestions
+    filteredPages.forEach(page => {
+        const suggestionItem = document.createElement('div');
+        suggestionItem.classList.add('suggestion-item');
+        suggestionItem.textContent = page.name;
+        
+        // Ajouter un événement de clic pour rediriger l'utilisateur
+        suggestionItem.onclick = function() {
+            window.location.href = page.url; // Redirige vers l'URL correspondante
+        };
+        
+        suggestionsContainer.appendChild(suggestionItem);
+    });
+    
+    // Afficher ou masquer les suggestions
+    suggestionsContainer.style.display = filteredPages.length > 0 ? 'block' : 'none';
+}
+
+    </script>
+
+    <!--la barre de navigation-->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="Home.html" class="active">Home</a></li>
+            <li class="dropdown">
+                <a href="diabete.html">About Diabetes <i class="fas fa-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="type1.html">Type 1</a></li>
+                    <li><a href="type2.html">Type 2</a></li>
+                    <li><a href="type3.html">Gestational Diabetes</a></li>
+                    <li><a href="warning-signs.html">Warning Signs and Symptoms</a></li>
+                    <li><a href="prevention.html">Diabetes Prevention</a></li>
+                    <li><a href="complications.html">Diabetes Complications</a></li>
+                </ul>
+            </li>
+            <li><a href="Test.html">Regime</a></li>
+            <li><a href="FAQ.html">FAQ's</a></li>
+            <li><a href="Contacte.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Reste du contenu -->
+</body>
+</html>

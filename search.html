@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de la recherche</title>
+</head>
+<body>
+    <h1>Résultats de la recherche pour: 
+        <span id="search-query"></span>
+    </h1>
+
+    <div id="results">
+        <!-- Affichage des résultats de recherche -->
+    </div>
+
+    <script>
+        // Récupérer le paramètre de recherche de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query');
+
+        // Afficher la requête de recherche dans la page
+        document.getElementById('search-query').textContent = query;
+
+        // Exemple de traitement pour afficher des résultats fictifs
+        const results = document.getElementById('results');
+        if (query) {
+            results.innerHTML = `<p>Vous avez recherché: <strong>${query}</strong></p>`;
+            // Vous pouvez ici ajouter un appel API ou interroger votre base de données pour les résultats
+        }
+    </script>
+</body>
+</html>
